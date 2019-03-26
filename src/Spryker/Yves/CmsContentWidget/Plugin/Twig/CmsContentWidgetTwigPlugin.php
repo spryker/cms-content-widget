@@ -5,34 +5,33 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Yves\CmsContentWidget\Plugin;
+namespace Spryker\Yves\CmsContentWidget\Plugin\Twig;
 
-use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Spryker\Service\Container\ContainerInterface;
+use Spryker\Shared\TwigExtension\Dependency\Plugin\TwigPluginInterface;
 use Spryker\Yves\CmsContentWidget\Dependency\CmsContentWidgetPluginInterface;
 use Spryker\Yves\Kernel\AbstractPlugin;
 use Twig\Environment;
 use Twig\TwigFunction;
 
 /**
- * @deprecated Use `\Spryker\Yves\CmsContentWidget\Plugin\Twig\CmsContentWidgetTwigPlugin` instead.
- *
  * @method \Spryker\Yves\CmsContentWidget\CmsContentWidgetFactory getFactory()
  */
-class CmsContentWidgetServiceProvider extends AbstractPlugin implements ServiceProviderInterface
+class CmsContentWidgetTwigPlugin extends AbstractPlugin implements TwigPluginInterface
 {
     /**
-     * @param \Silex\Application $app
+     * {@inheritdoc}
      *
-     * @return void
+     * @api
+     *
+     * @param \Twig\Environment $twig
+     * @param \Spryker\Service\Container\ContainerInterface $container
+     *
+     * @return \Twig\Environment
      */
-    public function register(Application $app)
+    public function extend(Environment $twig, ContainerInterface $container): Environment
     {
-        $app['twig'] = $app->share(
-            $app->extend('twig', function (Environment $twig) {
-                return $this->registerCmsContentWidgets($twig);
-            })
-        );
+        return $this->registerCmsContentWidgets($twig);
     }
 
     /**
@@ -40,7 +39,7 @@ class CmsContentWidgetServiceProvider extends AbstractPlugin implements ServiceP
      *
      * @return \Twig\Environment
      */
-    protected function registerCmsContentWidgets(Environment $twig)
+    protected function registerCmsContentWidgets(Environment $twig): Environment
     {
         foreach ($this->getFactory()->getCmsContentWidgetPlugins() as $functionName => $cmsContentWidgetPlugin) {
             $twig->addFunction(
@@ -57,7 +56,7 @@ class CmsContentWidgetServiceProvider extends AbstractPlugin implements ServiceP
      *
      * @return \Twig\TwigFunction
      */
-    protected function createTwigSimpleFunction($functionName, CmsContentWidgetPluginInterface $cmsContentWidgetPlugin)
+    protected function createTwigSimpleFunction(string $functionName, CmsContentWidgetPluginInterface $cmsContentWidgetPlugin): TwigFunction
     {
         return new TwigFunction(
             $functionName,
@@ -69,17 +68,12 @@ class CmsContentWidgetServiceProvider extends AbstractPlugin implements ServiceP
     /**
      * @return array
      */
-    protected function getTwigSimpleFunctionOptions()
+    protected function getTwigSimpleFunctionOptions(): array
     {
-        return ['needs_context' => true, 'needs_environment' => true, 'is_safe' => ['html']];
-    }
-
-    /**
-     * @param \Silex\Application $app
-     *
-     * @return void
-     */
-    public function boot(Application $app)
-    {
+        return [
+            'needs_context' => true,
+            'needs_environment' => true,
+            'is_safe' => ['html'],
+        ];
     }
 }

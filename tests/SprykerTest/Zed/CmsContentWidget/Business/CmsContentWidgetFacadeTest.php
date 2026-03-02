@@ -35,9 +35,6 @@ class CmsContentWidgetFacadeTest extends Unit
      */
     protected $cmsContentWidgetFacade;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -45,18 +42,12 @@ class CmsContentWidgetFacadeTest extends Unit
         $this->cmsContentWidgetFacade = new CmsContentWidgetFacade();
     }
 
-    /**
-     * @return void
-     */
     public function testMapContentWidgetParametersShouldSkipMappingIfThereIsNoTwigContent(): void
     {
         $parameterMap = $this->cmsContentWidgetFacade->mapContentWidgetParameters('cms content without twig functions');
         $this->assertEmpty($parameterMap);
     }
 
-    /**
-     * @return void
-     */
     public function testMapContentWidgetParametersShouldMapParametersWithPlugin(): void
     {
         $mockedCmsContentWidgetFunction = $this->createMockedCmsContentWidgetFunction();
@@ -124,9 +115,6 @@ class CmsContentWidgetFacadeTest extends Unit
         $this->assertSame($usageInformation, $cmsContentWidgetConfigurationTransfer->getUsageInformation());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandCmsBlockCollectorDataDoesNotThrowExceptionForNonExistingGlossaryTranslationKey(): void
     {
         // Arrange
@@ -146,9 +134,6 @@ class CmsContentWidgetFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return array
-     */
     public function getContentWidgetDataProvider(): array
     {
         return [
@@ -170,11 +155,6 @@ class CmsContentWidgetFacadeTest extends Unit
         ];
     }
 
-    /**
-     * @param \Spryker\Shared\CmsContentWidget\Dependency\CmsContentWidgetConfigurationProviderInterface $cmsContentWidgetConfigurationProviderMock
-     *
-     * @return \Spryker\Zed\CmsContentWidget\Business\CmsContentWidgetFacade
-     */
     protected function createCmsFacadeWithMockedContentWidgetConfigurationProviders(
         CmsContentWidgetConfigurationProviderInterface $cmsContentWidgetConfigurationProviderMock
     ): CmsContentWidgetFacade {
@@ -192,11 +172,6 @@ class CmsContentWidgetFacadeTest extends Unit
         return $cmsContentWidgetFacade;
     }
 
-    /**
-     * @param \Spryker\Zed\CmsContentWidget\Dependency\Plugin\CmsContentWidgetParameterMapperPluginInterface $cmsContentWidgetParameterMapperPluginMock
-     *
-     * @return \Spryker\Zed\CmsContentWidget\Business\CmsContentWidgetFacade
-     */
     protected function createCmsFacadeWithMockedContentWidgetParameterMapper(
         CmsContentWidgetParameterMapperPluginInterface $cmsContentWidgetParameterMapperPluginMock
     ): CmsContentWidgetFacade {
@@ -230,25 +205,16 @@ class CmsContentWidgetFacadeTest extends Unit
             ->getMock();
     }
 
-    /**
-     * @return \Spryker\Zed\CmsContentWidget\Business\CmsContentWidgetFacade
-     */
     protected function createCmsContentWidgetFacade(): CmsContentWidgetFacade
     {
         return new CmsContentWidgetFacade();
     }
 
-    /**
-     * @return \Spryker\Zed\CmsContentWidget\Business\CmsContentWidgetBusinessFactory
-     */
     protected function createBusinessFactory(): CmsContentWidgetBusinessFactory
     {
         return new CmsContentWidgetBusinessFactory();
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function createZedContainer(): Container
     {
         return new Container();

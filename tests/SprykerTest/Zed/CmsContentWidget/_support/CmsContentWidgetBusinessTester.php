@@ -33,9 +33,6 @@ class CmsContentWidgetBusinessTester extends Actor
      */
     protected const LOCALE_US = 'en_US';
 
-    /**
-     * @return \Generated\Shared\Transfer\LocaleTransfer
-     */
     public function buildLocaleTransferObject(): LocaleTransfer
     {
         $localeTransfer = new LocaleTransfer();

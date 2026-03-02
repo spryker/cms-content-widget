@@ -34,11 +34,6 @@ class CmsContentWidgetTwigPlugin extends AbstractPlugin implements TwigPluginInt
         return $this->registerCmsContentWidgets($twig);
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     *
-     * @return \Twig\Environment
-     */
     protected function registerCmsContentWidgets(Environment $twig): Environment
     {
         foreach ($this->getFactory()->getCmsContentWidgetPlugins() as $functionName => $cmsContentWidgetPlugin) {
@@ -50,12 +45,6 @@ class CmsContentWidgetTwigPlugin extends AbstractPlugin implements TwigPluginInt
         return $twig;
     }
 
-    /**
-     * @param string $functionName
-     * @param \Spryker\Yves\CmsContentWidget\Dependency\CmsContentWidgetPluginInterface $cmsContentWidgetPlugin
-     *
-     * @return \Twig\TwigFunction
-     */
     protected function createTwigSimpleFunction(string $functionName, CmsContentWidgetPluginInterface $cmsContentWidgetPlugin): TwigFunction
     {
         return new TwigFunction(
@@ -65,9 +54,6 @@ class CmsContentWidgetTwigPlugin extends AbstractPlugin implements TwigPluginInt
         );
     }
 
-    /**
-     * @return array
-     */
     protected function getTwigSimpleFunctionOptions(): array
     {
         return [

@@ -26,10 +26,6 @@ class TwigCmsContentRenderer implements TwigCmsContentRendererInterface
      */
     protected $cmsContentWidgetConfig;
 
-    /**
-     * @param \Twig\Environment $twigEnvironment
-     * @param \Spryker\Yves\CmsContentWidget\CmsContentWidgetConfig $cmsContentWidgetConfig
-     */
     public function __construct(Environment $twigEnvironment, CmsContentWidgetConfig $cmsContentWidgetConfig)
     {
         $this->twigEnvironment = $twigEnvironment;

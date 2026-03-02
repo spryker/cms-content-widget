@@ -18,9 +18,6 @@ class CmsBlockCollectorParameterMapExpander implements CmsBlockCollectorParamete
      */
     protected $contentWidgetParameterMapper;
 
-    /**
-     * @param \Spryker\Zed\CmsContentWidget\Business\ContentWidget\ContentWidgetParameterMapperInterface $contentWidgetParameterMapper
-     */
     public function __construct(ContentWidgetParameterMapperInterface $contentWidgetParameterMapper)
     {
         $this->contentWidgetParameterMapper = $contentWidgetParameterMapper;

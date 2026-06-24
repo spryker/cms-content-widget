@@ -10,6 +10,8 @@ namespace Spryker\Shared\CmsContentWidget;
 interface CmsContentWidgetConfig
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const CMS_CONTENT_WIDGET_PARAMETER_MAP = 'content_widget_parameter_map';
